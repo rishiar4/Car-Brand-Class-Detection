@@ -36,21 +36,25 @@ def model_predict(img_path, model):
     # x = np.true_divide(x, 255)
     ## Scaling
     x=x/255
-    x = np.expand_dims(x, axis=0)
+    # x = np.expand_dims(x, axis=0)
    
-
+    x = x.reshape((1, x.shape[0], x.shape[1], x.shape[2]))
     # Be careful how your trained model deals with the input
     # otherwise, it won't make correct prediction!
-    x = preprocess_input(x)
+    # x = preprocess_input(x)
 
     preds = model.predict(x)
     preds=np.argmax(preds, axis=1)
-    if preds==0:
-        preds="The Car IS Audi"
-    elif preds==1:
+    if preds == 0:
+        preds = "The Car is Porsche"
+    elif preds == 1:
+        preds = "The Car is MiniCooper"
+    elif preds == 2:
         preds="The Car is Lamborghini"
+    elif preds == 3:
+        preds = "The Car is Mercedes"
     else:
-        preds="The Car Is Mercedes"
+        preds="The Car is Audi"
     
     
     return preds
