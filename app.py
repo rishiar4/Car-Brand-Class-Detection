@@ -44,7 +44,9 @@ def model_predict(img_path, model):
     # x = preprocess_input(x)
 
     preds = model.predict(x)
+    print(preds)
     preds=np.argmax(preds, axis=1)
+    print(preds)
     if preds == 0:
         preds = "The Car is Porsche"
     elif preds == 1:
